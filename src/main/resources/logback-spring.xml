@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- logback-spring.xml 具体配置可以参考Maven:org.springframework.boot:spring-boot.1.5.3.RELEASE目录下的
+spring-boot-1.5.3.RELEASE.jar包下的
+org.springframework.boot.logging.logback目录下的xml-->
+
+<configuration>
+
+    <!--Windows指定文件输出路径 -->
+    <property name="LOG_HOME" value="D:/WeChatOrder-log/logs" />
+    <!--Linux指定文件输出路径-->
+    <!--<property name="LOG_HOME" value="/var/log/tomcat/sell" />-->
+
+    <!--配置控制台输出-->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                <!--指定输出格式-->
+                %d - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <!-- 配置每天输出一个Info文件 -->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--LevelFilter过滤-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <!--不匹配该级别及以上级别，具体可以通过LevelFilter类中跳转到FilterReply类查看-->
+            <onMatch>DENY</onMatch>
+            <!--表示匹配该级别以下的级别-->
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略，按照时间滚动-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--输出路径-->
+            <fileNamePattern>${LOG_HOME}/info.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 配置每天输出一个Error文件 -->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--ThresholdFilter 根据范围过滤 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>
+                %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略 按照时间滚动-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--输出路径 -->
+            <fileNamePattern>${LOG_HOME}/error.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--必须指定配置在root节点下使用-->
+    <root level="info">
+        <appender-ref ref="consoleLog" />
+        <appender-ref ref="fileInfoLog" />
+        <appender-ref ref="fileErrorLog" />
+    </root>
+
+</configuration>

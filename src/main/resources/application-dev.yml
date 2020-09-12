@@ -6,8 +6,6 @@ spring:
     url: jdbc:mysql://localhost/sell?characterEncoding=utf-8&useSSL=false
   jpa:
     show-sql: true
-server:
-  context-path: /sell
 
 
 #指定日志输出开始 由于logback-spring能够提升输出速度以及更加详细，故不用而注释掉这种输出

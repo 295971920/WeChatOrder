@@ -1,5 +1,8 @@
 package cn.xiaoshan.dataobject;
 
+import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,14 +12,19 @@ import javax.persistence.Id;
  * @Contact_QQ : 295971920
  * @CreateDate : 2020/9/12 22:03
  * @Description :类目
+ * @DynamicUpdate: 动态更新时间
  **/
 @Entity
+@DynamicUpdate
+@Data
 public class ProductCategory {
-    /** 类目id. */
-    @Id
-    @GeneratedValue
-    private Integer categoryId;
 
+   /**通过@Id标明为主键*/
+    @Id
+    /* @GeneratedValue为一个实体生成一个唯一标识的主键，主键由数据库生成, 采用数据库自增长*/
+    @GeneratedValue
+    /** 类目id*/
+    private Integer categoryId;
     /** 类目名字. */
     private String categoryName;
 
@@ -35,38 +43,5 @@ public class ProductCategory {
     public ProductCategory(String categoryName, Integer categoryType) {
         this.categoryName = categoryName;
         this.categoryType = categoryType;
-    }
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public Integer getCategoryType() {
-        return categoryType;
-    }
-
-    public void setCategoryType(Integer categoryType) {
-        this.categoryType = categoryType;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductCategory{" +
-                "categoryId=" + categoryId +
-                ", categoryName='" + categoryName + '\'' +
-                ", categoryType=" + categoryType +
-                '}';
     }
 }

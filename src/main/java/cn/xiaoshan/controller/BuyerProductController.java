@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-
 /**
  * @Author : XIAOSHAN
  * @Contact_QQ : 295971920
@@ -30,7 +29,7 @@ public class BuyerProductController {
     private CategoryService categoryService;
 
     @GetMapping("/list")
-    public ResultVO list(){
+    public ResultVO getList(){
         ResultVO resultVO = new ResultVO();
         ProductVO productVO = new ProductVO();
         ProductInfoVO productInfoVO = new ProductInfoVO();
@@ -45,7 +44,7 @@ public class BuyerProductController {
 
         productVO.setProductInfoVOList(Arrays.asList(productInfoVO));
         resultVO.setData(Arrays.asList(productVO));
-        
+
         resultVO.setCode(0);
         resultVO.setMsg("成功");
         return resultVO;

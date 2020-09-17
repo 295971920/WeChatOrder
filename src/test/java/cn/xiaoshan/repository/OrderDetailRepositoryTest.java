@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @Author : XIAOSHAN
  * @Contact_QQ : 295971920
- * @CreateDate : 2020/9/16 6:14
+ * @CreateDate : 2020/9/17 21:57
  * @Description :
  **/
 @RunWith(SpringRunner.class)
@@ -27,13 +27,13 @@ public class OrderDetailRepositoryTest {
     @Test
     public void saveTest(){
         OrderDetail orderDetail = new OrderDetail();
-        orderDetail.setDetailId("001");
-        orderDetail.setOrderId("1234567");
-        orderDetail.setProductId("987654321");
-        orderDetail.setProductName("抗蓝光眼镜");
-        orderDetail.setProductPrice(new BigDecimal(2.5));
-        orderDetail.setProductQuantity(999);
-        orderDetail.setProductIcon("http://xxxx.gif");
+        orderDetail.setDetailId("12345678910");
+        orderDetail.setOrderId("11111112");
+        orderDetail.setProductIcon("http://xxxx.jpg");
+        orderDetail.setProductId("11111113");
+        orderDetail.setProductName("皮蛋粥");
+        orderDetail.setProductPrice(new BigDecimal(2.2));
+        orderDetail.setProductQuantity(3);
 
         OrderDetail result = repository.save(orderDetail);
         Assert.assertNotNull(result);
@@ -41,8 +41,8 @@ public class OrderDetailRepositoryTest {
 
     @Test
     public void findByOrderId() throws Exception {
-        List<OrderDetail> orderDetailList = repository.findByOrderId("1234567");
-        Assert.assertNotEquals(0,orderDetailList.size());
+        List<OrderDetail> orderDetailList = repository.findByOrderId("11111112");
+        Assert.assertNotEquals(0, orderDetailList.size());
     }
 
 }

@@ -33,7 +33,7 @@ public class OrderMasterRepositoryTest {
     @Test
     public void saveTest(){
         OrderMaster orderMaster = new OrderMaster();
-        orderMaster.setOrderId("1234567");
+        orderMaster.setOrderId("12345678");
         orderMaster.setBuyerName("师兄");
         orderMaster.setBuyerPhone("123456789123");
         orderMaster.setBuyerAddress("幕课网");

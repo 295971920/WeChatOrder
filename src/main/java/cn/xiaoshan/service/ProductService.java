@@ -1,6 +1,7 @@
 package cn.xiaoshan.service;
 
 import cn.xiaoshan.dataobject.ProductInfo;
+import cn.xiaoshan.dto.CartDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,6 +14,8 @@ import java.util.List;
  * @Description : 商品
  **/
 public interface ProductService {
+
+    /*查询一条数据*/
     ProductInfo findOne(String productId);
 
     /**
@@ -36,6 +39,8 @@ public interface ProductService {
     ProductInfo save(ProductInfo productInfo);
 
     //加库存
+    void increaseStock(List<CartDTO> cartDTOList);
 
     //减库存
+    void decreaseStock(List<CartDTO> cartDTOList);
 }

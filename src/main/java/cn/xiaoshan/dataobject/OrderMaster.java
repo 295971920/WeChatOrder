@@ -50,4 +50,8 @@ public class OrderMaster {
 
     /** 更新时间. */
     private Date updateTime;
+
+    /*未使用DTO 避免字段与数据库不对应报错，使用@Transient声明忽略掉，但注意导包是import javax.persistence.Transient;*/
+//    @Transient
+//    private List<OrderDetail> orderDetailList;
 }

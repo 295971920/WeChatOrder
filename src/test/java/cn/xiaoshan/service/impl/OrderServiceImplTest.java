@@ -3,6 +3,7 @@ package cn.xiaoshan.service.impl;
 import cn.xiaoshan.dataobject.OrderDetail;
 import cn.xiaoshan.dto.OrderDTO;
 import cn.xiaoshan.enums.OrderStatusEnum;
+import cn.xiaoshan.enums.PayStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -102,12 +103,28 @@ public class OrderServiceImplTest {
         Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(),result.getOrderStatus());
     }
 
+    /**
+     * 完结订单 0为新订单，1为完结，2为取消
+     * @throws Exception
+     */
     @Test
     public void finish() throws Exception {
+        //确保ORDER_ID能在order_master表中找到
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.finish(orderDTO);
+        //确保orderMaster订单中orderStatus为0
+        Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(),result.getOrderStatus());
     }
 
+    /**
+     * 支付状态
+     * 测试前请保证订单为新订单
+     * @throws Exception
+     */
     @Test
     public void paid() throws Exception {
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.paid(orderDTO);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(),result.getPayStatus());
     }
-
 }

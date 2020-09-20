@@ -104,7 +104,8 @@ public class OrderServiceImplTest {
     }
 
     /**
-     * 完结订单 0为新订单，1为完结，2为取消
+     * 完结订单
+     * order_status: 0为新订单，1为完结，2为取消
      * @throws Exception
      */
     @Test
@@ -119,6 +120,7 @@ public class OrderServiceImplTest {
     /**
      * 支付状态
      * 测试前请保证订单为新订单
+     * pay_status: WAIT(0,"等待支付"),SUCCESS(1,"支付成功"),
      * @throws Exception
      */
     @Test

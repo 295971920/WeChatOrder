@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * @Author : XIAOSHAN
  * @Contact_QQ : 295971920
  * @CreateDate : 2020/9/20 9:20
- * @Description : 转换器
+ * @Description : OrderMaster转OrderDTO
  **/
 public class OrderMaster2OrderDTOConverter {
 

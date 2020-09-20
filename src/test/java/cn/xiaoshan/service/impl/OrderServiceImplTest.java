@@ -2,6 +2,7 @@ package cn.xiaoshan.service.impl;
 
 import cn.xiaoshan.dataobject.OrderDetail;
 import cn.xiaoshan.dto.OrderDTO;
+import cn.xiaoshan.enums.OrderStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,8 +32,12 @@ public class OrderServiceImplTest {
 
     private final String BUYER_OPENID = "110110";
 
-    private final String ORDER_ID = "1600561041840836688";
+    private final String ORDER_ID = "1600572381324274346";
 
+    /**
+     * 创建订单
+     * @throws Exception
+     */
     @Test
     public void create() throws Exception {
 
@@ -47,11 +52,11 @@ public class OrderServiceImplTest {
         List<OrderDetail> orderDetailList = new ArrayList<>();
         OrderDetail o1 = new OrderDetail();
         //保证setProductId在数据库中存在，否则报错
-        o1.setProductId("123457");
+        o1.setProductId("1234567");
         o1.setProductQuantity(1);
 
         OrderDetail o2 = new OrderDetail();
-        o2.setProductId("1234578");
+        o2.setProductId("12345678");
         o2.setProductQuantity(2);
 
         orderDetailList.add(o1);
@@ -63,6 +68,10 @@ public class OrderServiceImplTest {
         Assert.assertNotNull(result);
     }
 
+    /**
+     * 查询订单
+     * @throws Exception
+     */
     @Test
     public void findOne() throws Exception {
         OrderDTO result = orderService.findOne(ORDER_ID);
@@ -70,6 +79,10 @@ public class OrderServiceImplTest {
         Assert.assertEquals(ORDER_ID,result.getOrderId());
     }
 
+    /**
+     * 分页查询
+     * @throws Exception
+     */
     @Test
     public void findList() throws Exception {
         PageRequest request = new PageRequest(0, 2);
@@ -77,8 +90,16 @@ public class OrderServiceImplTest {
         Assert.assertNotEquals(0,orderDTOPage);
     }
 
+    /**
+     * 订单取消
+     * @throws Exception
+     */
     @Test
     public void cancel() throws Exception {
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.cancel(orderDTO);
+        //判断取消前后订单状态是否相同
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(),result.getOrderStatus());
     }
 
     @Test

@@ -99,12 +99,18 @@ public class OrderServiceImpl implements OrderService {
         return orderDTO;
     }
 
+    /**
+     * 根据orderId 查询
+     * @param orderId
+     * @return
+     */
     @Override
     public OrderDTO findOne(String orderId) {
         //传入查询Id
         OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
         //判断订单是否存在
         if (orderMaster == null){
+            log.error("[查询订单] 订单不存在 orderMaster={}",orderMaster.getOrderId());
             throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
         }
         //订单详情
@@ -119,6 +125,12 @@ public class OrderServiceImpl implements OrderService {
         return orderDTO;
     }
 
+    /**
+     * 分页查询
+     * @param buyerOpenid
+     * @param pageable
+     * @return
+     */
     @Override
     public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable)  {
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid,pageable);

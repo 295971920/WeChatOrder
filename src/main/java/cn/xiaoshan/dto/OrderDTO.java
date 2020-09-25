@@ -1,9 +1,12 @@
 package cn.xiaoshan.dto;
 
 import cn.xiaoshan.dataobject.OrderDetail;
+import cn.xiaoshan.utils.serializer.Date2LongSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +17,8 @@ import java.util.List;
  * @Description :
  **/
 @Data
+//@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL) 被废弃，使用下面新方法
+//@JsonInclude(JsonInclude.Include.NON_NULL)  全局可使用配置：jackson: default-property-inclusion: non_null
 public class OrderDTO {
     /**
      * 订单id.
@@ -58,13 +63,18 @@ public class OrderDTO {
     /**
      * 创建时间.
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
 
     /**
      * 更新时间.
+     * ms转换为s，就需要将ms/1000
+     * 使用注解方式调用工具类快速解决
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
-    List<OrderDetail> orderDetailList;
+    //设置返回空值时显示为[]
+    List<OrderDetail> orderDetailList = new ArrayList<>();
 
 }

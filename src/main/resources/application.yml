@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: dev
+  #全局配置去除Json返回空数据
+  jackson:
+    default-property-inclusion: non_null
 server:
   context-path: /sell
 

@@ -94,9 +94,7 @@ public class BuyerOrderControllor {
     public ResultVO<OrderDTO> detail(@RequestParam("openid") String openid,
                                      @RequestParam("orderId") String orderId){
 
-//        OrderDTO orderDTO =buyerService.findOrderOne(openid,orderId);
-        //TODO  不安全的做法  需要改进
-        OrderDTO orderDTO =orderService.findOne(orderId);
+        OrderDTO orderDTO =buyerService.findOrderOne(openid,orderId);
         return ResultVOUtil.success(orderDTO);
     }
 
@@ -104,11 +102,8 @@ public class BuyerOrderControllor {
     @PostMapping("/cancel")
     public ResultVO cancel(@RequestParam("openid") String openid,
                            @RequestParam("orderId") String orderId){
-//        OrderDTO orderDTO = buyerService.cancelOrder(openid, orderId);
-        //TODO 不安全的做法，容易被越权 需要改进
-        OrderDTO orderDTO = orderService.findOne(orderId);
-        orderService.cancel(orderDTO);
-        return ResultVOUtil.success();
+        OrderDTO orderDTO = buyerService.cancelOrder(openid, orderId);
+        return ResultVOUtil.success(orderDTO);
     }
 
 }

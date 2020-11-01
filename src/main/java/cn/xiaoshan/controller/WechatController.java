@@ -19,7 +19,7 @@ import java.net.URLEncoder;
  * @Author : XIAOSHAN
  * @Contact_QQ : 295971920
  * @CreateDate : 2020/10/22 23:54
- * @Description :第三方SDK实现微信授权
+ * @Description :使用第三方SDK实现微信授权
  **/
 @Controller
 @RequestMapping("/wechat")

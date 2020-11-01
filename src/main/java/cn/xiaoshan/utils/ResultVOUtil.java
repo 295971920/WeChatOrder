@@ -1,6 +1,6 @@
 package cn.xiaoshan.utils;
 
-import cn.xiaoshan.VO.ResultVO;
+import cn.xiaoshan.vo.ResultVO;
 
 /**
  * @Author : XIAOSHAN

@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderMasterRepository orderMasterRepository;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public OrderDTO create(OrderDTO orderDTO) {
         //初始化订单
         String orderId = KeyUtil.getUniqueKey();
@@ -84,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
         //注意拷贝数据容易覆盖原有数据，需要手动重新设置回去
         BeanUtils.copyProperties(orderDTO,orderMaster);
         //手动设置
-//        orderMaster.setOrderId(orderId);
+        //orderMaster.setOrderId(orderId);
         orderMaster.setOrderAmount(orderAmount);
         orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
         orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());

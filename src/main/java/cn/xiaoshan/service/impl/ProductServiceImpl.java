@@ -69,9 +69,11 @@ public class ProductServiceImpl implements ProductService {
         return repository.save(productInfo);
     }
 
-    /*加库存*/
+    /**
+     * 加库存
+     * */
     @Override
-    @Transactional
+    @Transactional(rollbackFor =Exception.class)
     public void increaseStock(List<CartDTO> cartDTOList) {
         for (CartDTO cartDTO : cartDTOList) {
             ProductInfo productInfo = repository.findOne(cartDTO.getProductId());
@@ -84,9 +86,11 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    /*减库存*/
+    /**
+     * 减库存
+     * */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void decreaseStock(List<CartDTO> cartDTOList) {
         for (CartDTO cartDTO : cartDTOList) {
             ProductInfo productInfo = repository.findOne(cartDTO.getProductId());

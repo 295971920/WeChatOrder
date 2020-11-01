@@ -1,4 +1,4 @@
-package cn.xiaoshan.VO;
+package cn.xiaoshan.vo;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package cn.xiaoshan.controller;
 
-import cn.xiaoshan.VO.ResultVO;
+import cn.xiaoshan.vo.ResultVO;
 import cn.xiaoshan.converter.OrderFrom2OrderDTOConverter;
 import cn.xiaoshan.dto.OrderDTO;
 import cn.xiaoshan.enums.ResultEnum;

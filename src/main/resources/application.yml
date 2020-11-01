@@ -9,4 +9,3 @@ server:
 wechat:
   mpAppId: wxbbcc880c6c06faae
   mpAppSecret: 1a416d3061fdd48329b58eeb03fe38bc
-  redirectUrl: www.xiaoshan2016.site/sell/wechat/authorize

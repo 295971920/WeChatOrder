@@ -1,4 +1,4 @@
-package cn.xiaoshan.VO;
+package cn.xiaoshan.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

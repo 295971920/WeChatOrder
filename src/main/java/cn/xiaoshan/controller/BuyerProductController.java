@@ -1,8 +1,8 @@
 package cn.xiaoshan.controller;
 
-import cn.xiaoshan.VO.ProductInfoVO;
-import cn.xiaoshan.VO.ProductVO;
-import cn.xiaoshan.VO.ResultVO;
+import cn.xiaoshan.vo.ProductInfoVO;
+import cn.xiaoshan.vo.ProductVO;
+import cn.xiaoshan.vo.ResultVO;
 import cn.xiaoshan.dataobject.ProductCategory;
 import cn.xiaoshan.dataobject.ProductInfo;
 import cn.xiaoshan.service.CategoryService;

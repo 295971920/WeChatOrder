@@ -9,6 +9,8 @@ import org.springframework.web.client.RestTemplate;
  * @Contact_QQ : 295971920
  * @CreateDate : 2020/10/18 0:34
  * @Description : 原生微信授权
+ * 1、用户同意授权，获取code，替换appid,redirect_uri,scope
+ * https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbbcc880c6c06faae&redirect_uri=http://sell.xiaoshan2016.site/sell/weixin/auth&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect
  **/
 @RestController
 @RequestMapping("/weixin")

@@ -1,6 +1,5 @@
 package cn.xiaoshan.controller;
 
-import cn.xiaoshan.config.WechatAccountConfig;
 import cn.xiaoshan.enums.ResultEnum;
 import cn.xiaoshan.exception.SellException;
 import lombok.extern.slf4j.Slf4j;
@@ -30,17 +29,17 @@ public class WechatController {
     @Autowired
     private WxMpService wxMpService;
 
-    @Autowired
-    private WechatAccountConfig wechatAccountConfig;
-
-
-    //http://www.xiaoshan2016.site/sell/wechat/authorize?returnUrl=xxxxxxxx.xxx
+    /**
+     * @param returnUrl
+     * @return
+     * 测试接口时随意给returnUrl传一个url即可
+     * sell.xiaoshan2016.site/sell/wechat/authorize?returnUrl=http://www.xiaoshan2016.cn
+     */
     @GetMapping("/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl){
         //1、配置
         //2、调用方法
-//        String url = "www.xiaoshan2016.site/sell/wechat/authorize";
-        String url = wechatAccountConfig.getRedirectUrl();
+        String url = "http://sell.xiaoshan2016.site/sell/wechat/userInfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl));
         log.info("【微信网页授权】获取code，result={}",redirectUrl);
         return "redirect:"+ redirectUrl;
@@ -60,13 +59,13 @@ public class WechatController {
         //根据sdk文档 通过code获得令牌与openid
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = new WxMpOAuth2AccessToken();
         try {
-            wxMpService.oauth2getAccessToken(code);
+            wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
         } catch (WxErrorException e) {
             log.error("【微信网页授权】{}",e);
             throw new SellException(ResultEnum.WECHAT_MP_ERROR.getCode(),e.getError().getErrorMsg());
         }
         //获取openId
         String openId = wxMpOAuth2AccessToken.getOpenId();
-        return  "returnUrl:"+returnUrl+"?openid"+openId;
+        return  "redirect:"+returnUrl+"?openid="+openId;
     }
 }
